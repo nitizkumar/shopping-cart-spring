@@ -132,15 +132,15 @@
             <div class="wine_v_1 text-center pb-4">
               <a href="shop-single.html" class="thumbnail d-block mb-4"><img src="images/wine_2.png" alt="Image" class="img-fluid"></a>
               <div>
-                <h3 class="heading mb-1"><a href="#">${wine}</a></h3>
-                <span class="price">$629.00</span>
+                <h3 class="heading mb-1"><a href="#">${wine.name}</a></h3>
+                <span class="price">$${wine.price}</span>
               </div>
               
 
               <div class="wine-actions">
                   
                 <h3 class="heading-2"><a href="#">${wine}</a></h3>
-                <span class="price d-block">$629.00</span>
+                <span class="price d-block">$${wine.price}</span>
                 
                 <div class="rating">
                   <span class="icon-star"></span>

@@ -9,38 +9,29 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.h2.command.ddl.DeallocateProcedure;
+
 /**
  * Servlet implementation class IndexServlet
  */
 public class IndexServlet extends HttpServlet {
-	
+
 	private static final long serialVersionUID = 1L;
 
-	private static List<String> wines = new ArrayList<>();
-	
-    /**
-     * Default constructor. 
-     */
-    public IndexServlet() {
-    	wines.add("Chardonnay White");
-    	wines.add("Sauvignon Blanc");
-    	wines.add("Chennin Blanc");
-    }
+	WineDependency dependency = null;
+	WineServiceRegistry registry = new WineServiceRegistry();
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("wines", wines);
-		request.getRequestDispatcher("wines.jsp").forward(request, response);
+	public IndexServlet() {
+		registry.initializeDependency();
+		dependency = (WineDependency) registry.getWineDependency(WineDependency.class);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		List<String> wines = new ArrayList<>();
+		List<WineDetail> listOfWines = dependency.getListOfWines();
+		request.setAttribute("wines", listOfWines);
+		request.getRequestDispatcher("wines.jsp").forward(request, response);
 	}
 
 }
