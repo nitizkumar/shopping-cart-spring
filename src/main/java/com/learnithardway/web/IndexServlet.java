@@ -18,18 +18,12 @@ public class IndexServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	WineDependency dependency = null;
-	WineServiceRegistry registry = new WineServiceRegistry();
-
-	public IndexServlet() {
-		registry.initializeDependency();
-		dependency = (WineDependency) registry.getWineDependency(WineDependency.class);
-	}
+	private WineDao dao = new WineDao();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		List<String> wines = new ArrayList<>();
-		List<WineDetail> listOfWines = dependency.getListOfWines();
+		List<WineDetail> listOfWines = dao.getListOfWines();
 		request.setAttribute("wines", listOfWines);
 		request.getRequestDispatcher("wines.jsp").forward(request, response);
 	}

@@ -10,7 +10,7 @@ import java.util.List;
 
 import org.h2.Driver;
 
-public class WineDao implements WineDependency{
+public class WineDao {
 
 public List<WineDetail> getListOfWines() {
 	ArrayList<WineDetail> listOfWine = new ArrayList<>();
