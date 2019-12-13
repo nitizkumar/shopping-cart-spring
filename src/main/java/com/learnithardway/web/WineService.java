@@ -2,6 +2,6 @@ package com.learnithardway.web;
 
 import java.util.List;
 
-public interface WineDao {
+public interface WineService {
     public List<WineDetail> getListOfWines();
 }
